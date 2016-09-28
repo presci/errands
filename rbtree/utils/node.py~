@@ -1,0 +1,32 @@
+class RBNode:
+    def __init__(self,arg0, arg1=None,arg2=False):
+        self.value=arg0
+        self.parent=arg1
+        self.red=arg2
+        self.left = None
+        self.right = None
+    def isleft(self):
+        if self.parent is None:
+            return None
+        if self.parent.left.value == self.value:
+            return True
+        return false
+    def isright(self):
+        return not self.isleft()
+    def pivotright(self, arg0=False):
+        pass
+    def pivotleft(self, arg0=False):
+        pass
+    def gp(self):
+        if self.parent is None:
+            return None
+        if self.parent.parent is None:
+            return None
+        return self.parent.parent
+    def uncle(self):
+        if self.gp() is None:
+            return None
+        if self.parent.isleft():
+            return self.parent.parent.right
+        return self.parent.parent.left
+                
