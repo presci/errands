@@ -1,46 +1,36 @@
 class RBNode:
-    def __init__(self,arg0, arg1=None,arg2=False):
+    def __init__(self,arg0, arg1=None,arg2=True):
         self.value=arg0
         self.parent=arg1
         self.red=arg2
         self.left = None
         self.right = None
+    def __str__(self):
+        return "value: %d, parent: %s, left: %s, right: %s" % (self.value, self.getparent(), self.getleft(), self.getright())
+    def getparent(self):
+        if self.parent is None:
+            return "None"
+        return "{%s,%s}" % (str(self.parent.value), str(self.parent.red)) 
+    def getleft(self):
+        if self.left is None:
+            return "None"
+        return "{%s,%s}" % (str(self.left.value), str(self.left.red))
+    def getright(self):
+        if self.right is None:
+            return "None"
+        return "{%s,%s}" % (str(self.right.value), str(self.right.red))
+    def isroot(self):
+        if self.parent is None:
+            return True
+        return False
     def isleft(self):
         if self.parent is None:
             return None
-        if self.parent.left.value == self.value:
+        if self.parent.left is not None and  self.parent.left.value == self.value:
             return True
-        return false
+        return False
     def isright(self):
         return not self.isleft()
-    def pivotright(self, arg0=False):
-        gp = self.gp()
-        p = self.p
-        r = self.r
-        p.parent = self
-        self.right = p
-        if gp is not None:
-            gp.right = self
-            self.parent = gp
-        if r is not None:
-            p.left=r
-            r.parent=p
-        if arg0 :
-            self.pivotleft()    
-    def pivotleft(self, arg0=False):
-        gp = self.gp()
-        p = self.p
-        l = self.l
-        self.left = p
-        p.parent = self
-        if gp is not None:
-            self.parent = gp
-            gp.right = self
-        if l is not None:
-            l.parent = p
-            p.right = l
-        if arg0:
-            self.pivotright()
     def gp(self):
         if self.parent is None:
             return None
@@ -53,4 +43,6 @@ class RBNode:
         if self.parent.isleft():
             return self.parent.parent.right
         return self.parent.parent.left
-                
+    def black(self):
+        self.red = False
+        
