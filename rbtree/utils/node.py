@@ -6,7 +6,7 @@ class RBNode:
         self.left = None
         self.right = None
     def __str__(self):
-        return "value: %d, parent: %s, left: %s, right: %s" % (self.value, self.getparent(), self.getleft(), self.getright())
+        return "value: {%s,%s}, parent: %s, left: %s, right: %s" % (str(self.value), str(self.red), self.getparent(), self.getleft(), self.getright())
     def getparent(self):
         if self.parent is None:
             return "None"
