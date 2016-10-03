@@ -7,7 +7,7 @@ class RBTree:
     def __init__(self):
         self.root= None
     def add(self, value):
-        if value == 110:
+        if value == 10:
             pdb.set_trace()
         if self.root is None:
             self.root = Node(value, None, False)
@@ -29,6 +29,7 @@ class RBTree:
     def rebalance(self, node):
         ## Case 1
         if node.isroot():
+            self.root = node
             return node.black()
         ## Case 2
         if not node.parent.red:
@@ -44,13 +45,13 @@ class RBTree:
         self.pivot(node)
     def pivot(self, node):
         if node.isleft() and node.parent.isleft():
-            return self.pivotright(node.parent)
+            self.pivotright(node.parent)
         if node.isleft() and node.parent.isright():
-            return self.pivotright(node, True)
+            self.pivotright(node, True)
         if node.isright() and node.parent.isright():
-            return self.pivotleft(node.parent)
+            self.pivotleft(node.parent)
         if node.isright() and node.parent.isleft():
-            return self.pivotleft(node, True)    
+            self.pivotleft(node, True)    
     def pivotright(self, arg0, arg1=False):
         P = arg0.parent
         C = arg0.right
@@ -58,37 +59,28 @@ class RBTree:
         arg0.right = P
         P.parent = arg0
         P.left = C
-        P.red = True
-        arg0.black()
         if C is not None:
             C.parent = P
         arg0.parent = GP
         if GP is not None:
             GP.left = arg0
-        else:
-            self.root = arg0
-            arg0.black()
         if arg1 :
-            self.pivotleft(arg0)    
+            self.pivotleft(arg0)
+        self.rebalance(arg0)
     def pivotleft(self, arg0, arg1=False):
         P = arg0.parent
         C = arg0.left
         GP = arg0.gp()
         arg0.left = P
-        P.parent = arg0
         P.right = C
-        P.red = True
-        arg0.black()
         if C is not None:
             C.parent = P
         arg0.parent = GP
         if GP is not None:
             GP.right = arg0
-        else:
-            self.root = arg0
-            arg0.black()
         if arg1:
-            self.pivotright(arg0)    
+            self.pivotright(arg0)
+        self.rebalance(arg0)
     def printme_inline(self, node):
         if node is None:
             return
@@ -99,16 +91,7 @@ class RBTree:
 
 
 rbtree= RBTree()
-rbtree.add(10)
-rbtree.add(30)
 rbtree.add(40)
-rbtree.printme_inline(rbtree.root)
-print "---------------"
-rbtree.add(7)
-print "---------------"
-rbtree.printme_inline(rbtree.root)
-rbtree.add(57)
-print "---------------"
-rbtree.add(80)
-#rbtree.add(25)
+rbtree.add(30)
+rbtree.add(10)
 rbtree.printme_inline(rbtree.root)
