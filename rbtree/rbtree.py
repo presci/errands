@@ -7,7 +7,7 @@ class RBTree:
     def __init__(self):
         self.root= None
     def add(self, value):
-        if value == 500:
+        if value == 3451:
             pdb.set_trace()
         if self.root is None:
             self.root = Node(value, None, False)
@@ -79,6 +79,7 @@ class RBTree:
         C = arg0.left
         GP = arg0.gp()
         arg0.left = P
+        P.parent = arg0
         P.right = C
         if C is not None:
             C.parent = P
