@@ -73,7 +73,7 @@ class RBTree:
         else:
             arg0.red = False
             P.red = True
-        self.rebalance(arg0)
+        self.rebalance(P)
     def pivotleft(self, arg0, arg1=False):
         P = arg0.parent
         C = arg0.left
@@ -91,7 +91,7 @@ class RBTree:
         else:
             arg0.red = False
             P.red = True
-        self.rebalance(arg0)
+        self.rebalance(P)
     def printme_inline(self, node):
         if node is None:
             return
