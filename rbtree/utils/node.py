@@ -45,4 +45,8 @@ class RBNode:
         return self.parent.parent.left
     def black(self):
         self.red = False
-        
+    def isblack(self):
+        return not self.red
+    def isred(self):
+        return self.red
+    

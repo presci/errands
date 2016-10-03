@@ -55,8 +55,6 @@ class RBTree:
         elif node.isright() and node.parent.isleft():
             self.pivotleft(node, True)    
     def pivotright(self, arg0, arg1=False):
-        if arg0.value == 230:
-            pdb.set_trace()
         P = arg0.parent
         C = arg0.right
         GP = arg0.gp()
@@ -73,8 +71,10 @@ class RBTree:
         else:
             arg0.red = False
             P.red = True
-        self.rebalance(P)
+        self.rebalance(arg0)
     def pivotleft(self, arg0, arg1=False):
+        if arg0.value == 300:
+            pdb.set_trace()
         P = arg0.parent
         C = arg0.left
         GP = arg0.gp()
@@ -91,12 +91,12 @@ class RBTree:
         else:
             arg0.red = False
             P.red = True
-        self.rebalance(P)
+        self.rebalance(arg0)
     def printme_inline(self, node):
         if node is None:
             return
-        self.printme_inline(node.left)
         print node
+        self.printme_inline(node.left)
         self.printme_inline(node.right)
 
 
@@ -109,5 +109,5 @@ rbtree.add(50)
 rbtree.add(75)
 rbtree.add(300)
 rbtree.add(345)
-
+rbtree.add(375)
 rbtree.printme_inline(rbtree.root)
