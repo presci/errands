@@ -7,12 +7,10 @@ class RBTree:
     def __init__(self):
         self.root= None
     def add(self, value):
-        if value == 10:
-            pdb.set_trace()
         if self.root is None:
             self.root = Node(value, None, False)
             return
-        return self.__add(value, self.root)
+        self.__add(value, self.root)
     def __add(self, value, node):
         if node.value > value:
             if node.left is None:
@@ -30,7 +28,8 @@ class RBTree:
         ## Case 1
         if node.isroot():
             self.root = node
-            return node.black()
+            node.black()
+            return
         ## Case 2
         if not node.parent.red:
             return
@@ -46,13 +45,15 @@ class RBTree:
     def pivot(self, node):
         if node.isleft() and node.parent.isleft():
             self.pivotright(node.parent)
-        if node.isleft() and node.parent.isright():
+        elif node.isleft() and node.parent.isright():
             self.pivotright(node, True)
-        if node.isright() and node.parent.isright():
+        elif node.isright() and node.parent.isright():
             self.pivotleft(node.parent)
-        if node.isright() and node.parent.isleft():
+        elif node.isright() and node.parent.isleft():
             self.pivotleft(node, True)    
     def pivotright(self, arg0, arg1=False):
+        if arg0.value == 230:
+            pdb.set_trace()
         P = arg0.parent
         C = arg0.right
         GP = arg0.gp()
@@ -94,4 +95,9 @@ rbtree= RBTree()
 rbtree.add(40)
 rbtree.add(30)
 rbtree.add(10)
+rbtree.add(50)
+rbtree.add(75)
+rbtree.add(300)
+rbtree.add(345)
+
 rbtree.printme_inline(rbtree.root)
