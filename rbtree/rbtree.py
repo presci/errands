@@ -7,6 +7,8 @@ class RBTree:
     def __init__(self):
         self.root= None
     def add(self, value):
+        if value == 500:
+            pdb.set_trace()
         if self.root is None:
             self.root = Node(value, None, False)
             return
@@ -40,6 +42,7 @@ class RBTree:
             node.parent.red = False
             node.gp().red = True
             self.rebalance(node.gp())
+            return
         ## Case 4
         self.pivot(node)
     def pivot(self, node):
